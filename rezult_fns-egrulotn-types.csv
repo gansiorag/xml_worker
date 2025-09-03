@@ -1,0 +1,77 @@
+0,xs:schema,Уровень 0 
+1,xs:schema,@xmlns:xs,Уровень 1 
+2,xs:schema,@xmlns:fns,Уровень 1 
+3,xs:schema,@targetNamespace,Уровень 1 
+4,xs:schema,@elementFormDefault,Уровень 1 
+5,xs:schema,@attributeFormDefault,Уровень 1 
+6,xs:schema,xs:complexType,Уровень 1 
+7,xs:schema,xs:complexType, Список строка 1
+8,xs:schema,xs:complexType,@name,Уровень 3 
+9,xs:schema,xs:complexType,xs:annotation,Уровень 3 
+10,xs:schema,xs:complexType,xs:annotation,xs:documentation,Уровень 4 
+11,xs:schema,xs:complexType,xs:sequence,Уровень 3 
+12,xs:schema,xs:complexType,xs:sequence,xs:element,Уровень 4 
+13,xs:schema,xs:complexType,xs:sequence,xs:element,@name,Уровень 5 
+14,xs:schema,xs:complexType,xs:sequence,xs:element,@type,Уровень 5 
+15,xs:schema,xs:complexType,xs:sequence,xs:element,@maxOccurs,Уровень 5 
+16,xs:schema,xs:complexType,xs:sequence,xs:element,xs:annotation,Уровень 5 
+17,xs:schema,xs:complexType,xs:sequence,xs:element,xs:annotation,xs:documentation,Уровень 6 
+18,xs:schema,xs:complexType, Список строка 2
+19,xs:schema,xs:complexType,@name,Уровень 3 
+20,xs:schema,xs:complexType,xs:annotation,Уровень 3 
+21,xs:schema,xs:complexType,xs:annotation,xs:documentation,Уровень 4 
+22,xs:schema,xs:complexType,xs:sequence,Уровень 3 
+23,xs:schema,xs:complexType,xs:sequence,xs:element,Уровень 4 
+24,xs:schema,xs:complexType,xs:sequence,xs:element, Список строка 1
+25,xs:schema,xs:complexType,xs:sequence,xs:element,@name,Уровень 6 
+26,xs:schema,xs:complexType,xs:sequence,xs:element,@type,Уровень 6 
+27,xs:schema,xs:complexType,xs:sequence,xs:element,xs:annotation,Уровень 6 
+28,xs:schema,xs:complexType,xs:sequence,xs:element,xs:annotation,xs:documentation,Уровень 7 
+29,xs:schema,xs:complexType,xs:sequence,xs:element, Список строка 2
+30,xs:schema,xs:complexType,xs:sequence,xs:element,@name,Уровень 6 
+31,xs:schema,xs:complexType,xs:sequence,xs:element,xs:annotation,Уровень 6 
+32,xs:schema,xs:complexType,xs:sequence,xs:element,xs:annotation,xs:documentation,Уровень 7 
+33,xs:schema,xs:complexType,xs:sequence,xs:element,xs:simpleType,Уровень 6 
+34,xs:schema,xs:complexType,xs:sequence,xs:element,xs:simpleType,xs:restriction,Уровень 7 
+35,xs:schema,xs:complexType,xs:sequence,xs:element,xs:simpleType,xs:restriction,@base,Уровень 8 
+36,xs:schema,xs:complexType,xs:sequence,xs:element,xs:simpleType,xs:restriction,xs:enumeration,Уровень 8 
+37,xs:schema,xs:complexType,xs:sequence,xs:element,xs:simpleType,xs:restriction,xs:enumeration,@value,Уровень 9 
+38,xs:schema,xs:complexType,xs:sequence,xs:element, Список строка 3
+39,xs:schema,xs:complexType,xs:sequence,xs:element,@name,Уровень 6 
+40,xs:schema,xs:complexType,xs:sequence,xs:element,@type,Уровень 6 
+41,xs:schema,xs:complexType,xs:sequence,xs:element,xs:annotation,Уровень 6 
+42,xs:schema,xs:complexType,xs:sequence,xs:element,xs:annotation,xs:documentation,Уровень 7 
+43,xs:schema,xs:complexType,xs:sequence,xs:element, Список строка 4
+44,xs:schema,xs:complexType,xs:sequence,xs:element,@name,Уровень 6 
+45,xs:schema,xs:complexType,xs:sequence,xs:element,@type,Уровень 6 
+46,xs:schema,xs:complexType,xs:sequence,xs:element,@minOccurs,Уровень 6 
+47,xs:schema,xs:complexType,xs:sequence,xs:element,xs:annotation,Уровень 6 
+48,xs:schema,xs:complexType,xs:sequence,xs:element,xs:annotation,xs:documentation,Уровень 7 
+49,xs:schema,xs:complexType,xs:sequence,xs:element, Список строка 5
+50,xs:schema,xs:complexType,xs:sequence,xs:element,@name,Уровень 6 
+51,xs:schema,xs:complexType,xs:sequence,xs:element,@type,Уровень 6 
+52,xs:schema,xs:complexType,xs:sequence,xs:element,@minOccurs,Уровень 6 
+53,xs:schema,xs:complexType,xs:sequence,xs:element,xs:annotation,Уровень 6 
+54,xs:schema,xs:complexType,xs:sequence,xs:element,xs:annotation,xs:documentation,Уровень 7 
+55,xs:schema,xs:simpleType,Уровень 1 
+56,xs:schema,xs:simpleType, Список строка 1
+57,xs:schema,xs:simpleType,@name,Уровень 3 
+58,xs:schema,xs:simpleType,xs:annotation,Уровень 3 
+59,xs:schema,xs:simpleType,xs:annotation,xs:documentation,Уровень 4 
+60,xs:schema,xs:simpleType,xs:restriction,Уровень 3 
+61,xs:schema,xs:simpleType,xs:restriction,@base,Уровень 4 
+62,xs:schema,xs:simpleType,xs:restriction,xs:maxLength,Уровень 4 
+63,xs:schema,xs:simpleType,xs:restriction,xs:maxLength,@value,Уровень 5 
+64,xs:schema,xs:simpleType,xs:restriction,xs:minLength,Уровень 4 
+65,xs:schema,xs:simpleType,xs:restriction,xs:minLength,@value,Уровень 5 
+66,xs:schema,xs:simpleType, Список строка 2
+67,xs:schema,xs:simpleType,@name,Уровень 3 
+68,xs:schema,xs:simpleType,xs:annotation,Уровень 3 
+69,xs:schema,xs:simpleType,xs:annotation,xs:documentation,Уровень 4 
+70,xs:schema,xs:simpleType,xs:restriction,Уровень 3 
+71,xs:schema,xs:simpleType,xs:restriction,@base,Уровень 4 
+72,xs:schema,xs:simpleType,xs:restriction,xs:maxLength,Уровень 4 
+73,xs:schema,xs:simpleType,xs:restriction,xs:maxLength,@value,Уровень 5 
+74,xs:schema,xs:simpleType,xs:restriction,xs:minLength,Уровень 4 
+75,xs:schema,xs:simpleType,xs:restriction,xs:minLength,@value,Уровень 5 
+76,
