@@ -142,3 +142,8 @@ class Xmlworker:
                                             row, full_info)
         return full_info
 
+
+    @staticmethod
+    def get_dict(data: str):
+        is_dict = xd.parse(data)
+        return is_dict
