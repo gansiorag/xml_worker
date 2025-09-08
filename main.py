@@ -18,8 +18,8 @@ sys.path.append(current_directory)
 from set_prog.base_class import Xmlworker
 
 xml_worker = Xmlworker()
-name_file = '/home/gansior/MyProject/xml_worker/test_datasets/1020700588688.xml'
-# name_file = '/home/gansior/MyProject/xml_worker/test_datasets/push_mes_egrul.xml'
+# name_file = '/home/gansior/MyProject/xml_worker/test_datasets/1020700588688.xml'
+name_file = '/home/gansior/MyProject/xml_worker/test_datasets/push_mes_egrul.xml'
 # name_file = '/home/gansior/MyProject/xml_worker/test_datasets/13673441xsd/VO_RUGF_2_311_26_04_07_01.xsd'
 # name_file = '/home/gansior/MyProject/xml_worker/test_datasets/schemas_egrul/fns-egrulotn-types.xsd'
 # name_file = '/home/gansior/MyProject/xml_worker/test_datasets/schemas_egrul/schemas.xsd'

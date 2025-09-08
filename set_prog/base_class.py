@@ -10,7 +10,8 @@ Ending 2025//
 import xmltodict as xd
 
 
-def dictionary_analysis(str_path: str, level: int, dict_cur: dict, full_info: str):
+def dictionary_analysis(str_path: str, level: int,
+                        dict_cur: dict, full_info: str):
     """_summary_
 
     Args:
@@ -37,7 +38,9 @@ def dictionary_analysis(str_path: str, level: int, dict_cur: dict, full_info: st
     return full_info
 
 
-def dictionary_analysis_value(str_path: str, level: int, dict_cur: dict, full_info: str):
+def dictionary_analysis_value(
+    str_path: str, level: int, dict_cur: dict, full_info: str
+):
     """_summary_
 
     Args:
@@ -62,43 +65,38 @@ def dictionary_analysis_value(str_path: str, level: int, dict_cur: dict, full_in
                 str_path + key + "^", new_level, 0, dict_cur[key], full_info
             )
         if isinstance(dict_cur[key], str):
-            full_info = get_value(str_path, dict_cur[key], key, level, full_info) 
+            full_info = get_value(str_path, dict_cur[key],
+                                  key, level, full_info)
     return full_info
 
 
 def list_analysis(
     str_path: str, level_dict: int, level_list: int,
-    list_cur: list, full_info: str
-):
-    """_summary_
-
+        list_cur: list, full_info: str) -> str:
+    """
+    Анализирует список, рекурсивно обрабатывая вложенные словари и списки.
     Args:
         str_path (str): Текущий путь в структуре данных.
         level_dict (int): Уровень вложенности словаря.
         level_list (int): Уровень вложенности списка.
         list_cur (list): Текущий список для анализа.
         full_info (str): Накопленная информация.
-
     Returns:
-        full_info (str): Обновленная накопленная информация
+        str: Обновленная накопленная информация.
     """
-    new_level_dict = 0
-    new_level_list = 0
-    for row in list_cur:
-        new_level_list = new_level_list + 1
-        if isinstance(row, dict):
-            new_level_dict = level_dict
-            print(str_path, f", List string {new_level_list}")
-            full_info += str_path + f" List string {new_level_list}\n"
-            full_info = dictionary_analysis(str_path, new_level_dict,
-                                            row, full_info)
-        if isinstance(row, list):
-            print(str_path, f", List string {new_level_list}")
-            full_info += str_path + f" List string {new_level_list}\n"
-            full_info = list_analysis(
-                str_path, level_dict, new_level_list, row, full_info
-            )
- 
+    for idx, item in enumerate(list_cur, start=1):
+        # Формируем сообщение о текущем элементе списка
+        info_line = f"{str_path} List string {idx}"
+        print(info_line)
+        full_info += info_line + "\n"
+        if isinstance(item, dict):
+            # Передаём текущий уровень словаря без изменений
+            full_info = dictionary_analysis(str_path, level_dict,
+                                            item, full_info)
+        elif isinstance(item, list):
+            # Для вложенного списка
+            full_info = list_analysis(str_path, level_dict, idx,
+                                      item, full_info)
     return full_info
 
 
@@ -126,20 +124,21 @@ def list_analysis_value(
             new_level_dict = level_dict
             print(str_path, f", List string {new_level_list}")
             full_info += str_path + f" List string {new_level_list}\n"
-            full_info = dictionary_analysis_value(str_path, new_level_dict,
-                                            row, full_info)
+            full_info = dictionary_analysis_value(
+                str_path, new_level_dict, row, full_info
+            )
         if isinstance(row, list):
             print(str_path, f", List string {new_level_list}")
             full_info += str_path + f" List string {new_level_list}\n"
             full_info = list_analysis_value(
                 str_path, level_dict, new_level_list, row, full_info
             )
- 
+
     return full_info
 
 
 def get_value(str_path: str, is_dict: str, key: str, level, full_info: str):
-    full_info += str_path + key + '^' + is_dict + f"^Level {level + 1} \n"
+    full_info += str_path + key + "^" + is_dict + f"^Level {level + 1} \n"
     return full_info
 
 
@@ -148,45 +147,49 @@ class Xmlworker:
 
     @staticmethod
     def xml_clear(ddd: str) -> str:
-        """Очистка xml от артефактов двойных кавычек
-
+        """Очистка XML от артефактов с дублирующимися двойными кавычками.
+        Заменяет все двойные кавычки внутри значений атрибутов (кроме внешних)
+        на &quot;.
         Args:
-            ddd (str): XML строка, в которой заменяются дублирующиеся
-                       двойные кавычки на &quot;
-
+            ddd (str): Исходная XML-строка.
         Returns:
-            str: Очищенная XML строка
+            str: Очищенная XML-строка.
         """
-        new_str = []
-        ser_list = ddd.split(">")
-        com_str_error = 0
-        for fr1_str in ser_list:
-            ser1_list = fr1_str.split("=")
-            new_str2 = []
-            if len(ser1_list) > 1:
-                for fr2_str in ser1_list:
-                    if fr2_str.count('"') > 2:
-                        com_str_error += 1
-                        fr3_str = fr2_str[fr2_str.find('"') + 1:]
-                        fr4_str = fr3_str[: fr3_str.rfind('"')].replace('"',
-                                                                        "&quot;")
-                        serv_str = (
-                            "="
-                            + fr2_str[: fr2_str.find('"') + 2]
-                            + fr4_str
-                            + fr2_str[fr2_str.rfind('"'):]
-                        )
-                        new_str2.append(serv_str)
-                    elif 0 < fr2_str.count('"') <= 2:
-                        new_str2.append("=" + fr2_str)
-                    else:
-                        new_str2.append(fr2_str)
-            else:
-                new_str2.append(ser1_list[0])
-            new_str.append("".join(new_str2))
-        rez_str = ">".join(new_str)
-        return rez_str
-
+        parts = ddd.split(">")
+        cleaned_parts = []
+        for part in parts:
+            segments = part.split("=")
+            if len(segments) == 1:
+                # Нет атрибутов, просто добавляем часть как есть
+                cleaned_parts.append(segments[0])
+                continue
+            new_segments = [segments[0]]  # первая часть до первого '='
+            for seg in segments[1:]:
+                quote_count = seg.count('"')
+                if quote_count > 2:
+                    # Есть лишние двойные кавычки внутри значения
+                    first_quote_idx = seg.find('"')
+                    last_quote_idx = seg.rfind('"')
+                    # Внутренние кавычки заменяем на &quot;
+                    inner = seg[first_quote_idx + 1: last_quote_idx].replace(
+                        '"', "&quot;"
+                    )
+                    # Собираем обратно: = + открывающая кавычка + очищенное
+                    # содержимое + закрывающая кавычка + остаток
+                    fixed = (
+                        "=" + seg[: first_quote_idx + 1] + inner
+                        + seg[last_quote_idx:]
+                    )
+                    new_segments.append(fixed)
+                elif 0 < quote_count <= 2:
+                    # Значение с корректным количеством кавычек, просто
+                    # добавляем с '='
+                    new_segments.append("=" + seg)
+                else:
+                    # Нет кавычек, добавляем как есть
+                    new_segments.append(seg)
+            cleaned_parts.append("".join(new_segments))
+        return ">".join(cleaned_parts)
 
     @staticmethod
     def full_struct_xml(data: str):
@@ -207,13 +210,12 @@ class Xmlworker:
                         key + "^", level, is_dict[key], full_info
                     )
         if isinstance(is_dict, list):
-            print('root_list', f", List string {level}")
-            full_info += 'root_list,' + f" List string {level}\n"
-            full_info = list_analysis('root_list', level,
+            print("root_list", f", List string {level}")
+            full_info += "root_list," + f" List string {level}\n"
+            full_info = list_analysis("root_list", level,
                                       level, is_dict, full_info)
-    
-        return full_info
 
+        return full_info
 
     @staticmethod
     def full_struct_xml_value(data: str):
@@ -234,14 +236,14 @@ class Xmlworker:
                         key + "^", level, is_dict[key], full_info
                     )
         if isinstance(is_dict, list):
-            print('root_list', f", List string {level}")
-            full_info += 'root_list,' + f" List string {level}\n"
-            full_info = list_analysis_value('root_list', level,
-                                      level, is_dict, full_info)
+            print("root_list", f", List string {level}")
+            full_info += "root_list," + f" List string {level}\n"
+            full_info = list_analysis_value(
+                "root_list", level, level, is_dict, full_info
+            )
         if isinstance(is_dict, str):
-            full_info = get_value('root^', is_dict, 'root', level, full_info)
+            full_info = get_value("root^", is_dict, "root", level, full_info)
         return full_info
-
 
     @staticmethod
     def get_dict(data: str):
