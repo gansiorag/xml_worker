@@ -28,11 +28,13 @@ with open(name_file, 'r', encoding='utf-8') as i_f:
     data_clear = xml_worker.xml_clear(data)
     dict_data = xml_worker.get_dict(data_clear)
     print(dict_data)
-    # f_str = xml_worker.full_struct_xml(data_clear)
-    f_str = xml_worker.full_struct_xml_value(data_clear)
-    name_rezult = name_file.split('/')[-1].split('.')[0]
-    with open(f'rezult_{name_rezult}.csv', 'w', encoding='utf-8') as r_f:
-        num_str = 0
-        for row in f_str.split('\n'):
-            r_f.write(str(num_str) + '^' + row + '\n')
-            num_str += 1
+
+    name_file_rezult = f'rezult_{name_file.split('/')[-1].split('.')[0]}_full.csv'
+    f_str = xml_worker.full_struct_xml(data_clear, name_file_rezult)
+    name_file_rezult = f'rezult_{name_file.split('/')[-1].split('.')[0]}_value.csv'
+
+    # name_file_rezult = f'rezult_{name_file.split('/')[-1].split('.')[0]}_value.csv'
+    # f_str = xml_worker.full_struct_xml_value(data_clear, name_file_rezult)  # Получение полной структуры XML с
+
+    # name_file_rezult = f'rezult_{name_file.split('/')[-1].split('.')[0]}_dist.csv'
+    # f_str = xml_worker.full_dist_struct_xml(data_clear, name_file_rezult)  # Получение полной структуры XML с уникальными атрибутами
