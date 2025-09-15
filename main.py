@@ -29,12 +29,11 @@ with open(name_file, 'r', encoding='utf-8') as i_f:
     dict_data = xml_worker.get_dict(data_clear)
     print(dict_data)
 
-    name_file_rezult = f'rezult_{name_file.split('/')[-1].split('.')[0]}_full.csv'
-    f_str = xml_worker.full_struct_xml(data_clear, name_file_rezult)
-    name_file_rezult = f'rezult_{name_file.split('/')[-1].split('.')[0]}_value.csv'
-
+    # name_file_rezult = f'rezult_{name_file.split('/')[-1].split('.')[0]}_full.csv'
+    # f_str = xml_worker.full_struct_xml(data_clear, name_file_rezult)
+    
     # name_file_rezult = f'rezult_{name_file.split('/')[-1].split('.')[0]}_value.csv'
     # f_str = xml_worker.full_struct_xml_value(data_clear, name_file_rezult)  # Получение полной структуры XML с
 
-    # name_file_rezult = f'rezult_{name_file.split('/')[-1].split('.')[0]}_dist.csv'
-    # f_str = xml_worker.full_dist_struct_xml(data_clear, name_file_rezult)  # Получение полной структуры XML с уникальными атрибутами
+    name_file_rezult = f'rezult_{name_file.split('/')[-1].split('.')[0]}_dist.csv'
+    f_str = xml_worker.full_dist_struct_xml(data_clear, name_file_rezult)  # Получение полной структуры XML с уникальными атрибутами
