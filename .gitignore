@@ -4,3 +4,6 @@ rezult_1020700588688.csv
 rezult_push_mes_egrul.csv
 .~lock.rezult_push_mes_egrul_dist.csv#
 .~lock.rezult_push_mes_egrul.csv#
+test_datasets/doverennost.xml
+rezult_doverennost_dist.csv
+rezult_doverennost_value.csv
