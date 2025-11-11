@@ -8,6 +8,7 @@ Ending 2025//
 """
 
 import xmltodict as xd
+from pprint import pprint
 
 
 def dictionary_analysis_dist(str_path: str, level: int, dict_cur: dict, full_info: str):
@@ -352,3 +353,82 @@ class Xmlworker:
     def get_dict(data: str):
         is_dict = xd.parse(data)
         return is_dict
+
+    @staticmethod
+    def anl_list(path_full: list, step: int, i_d: list):
+        k_l = 0
+        for d_l in i_d:
+            if isinstance(d_l, list):
+                print(f'List_2 {k_l}')
+                dd = Xmlworker.anl_list(path_full, step, d_l)
+                k_l += 1
+            if isinstance(d_l, dict):
+                dd = Xmlworker.anl_dict(path_full, step, d_l)
+            if isinstance(d_l, str):
+                return d_l       
+        
+    @staticmethod
+    def anl_dict(path_full: list, step: int, i_d: dict):
+        """Раскладывает словарь до конечного значения
+
+        Args:
+            path_full (list): Полный путь до значения
+            step (int): номер шага полного пути
+            i_d (dict): анализируемая структура
+
+        Raises:
+            KeyError: _description_
+
+        Returns:
+            _type_: возвращает значение шага
+        """
+        # print('path_full => ', path_full)
+        # print('step => ', step)
+        # print('==== anl_dict ====')
+        if step == len(path_full):
+            key = path_full[step - 1]
+            print(f'Value key {key}')
+            if key in i_d:
+                pprint(i_d[key])
+                return i_d[key]
+            else:
+                if isinstance(i_d[path_full[step - 2]][key], str):
+                    print(i_d[path_full[step - 2]][key])
+
+                    return i_d[path_full[step - 2]][key]
+        else:
+            key = path_full[step]
+            if isinstance(i_d, dict):
+                return Xmlworker.anl_dict(path_full, step + 1, i_d)
+            elif isinstance(i_d[key], list):
+                dd = Xmlworker.anl_list(path_full, step, i_d[key])
+                return dd
+            elif isinstance(i_d[key], str):
+                raise KeyError(f"Value step {step}: {key} is {i_d[key]}")
+
+    @staticmethod
+    def get_data(is_da: dict, data_str: str):
+        if not isinstance(is_da, dict):
+            raise ValueError("is_da must be a dictionary")
+        if not data_str or not isinstance(data_str, str):
+            return None
+
+        path = [part.strip() for part in data_str.strip().split('^') if part.strip()]
+        if not path:
+            return None
+        k_l = 0
+        current = is_da
+        for i, key in enumerate(path):
+            print(f' 1 == {key}')
+            if key not in current:
+                print(f"Error - field '{'^'.join(path[:i+1])}' not found!")
+                return None
+            current = current[key]
+            if isinstance(current, list):
+                print(f'List {k_l}')
+                dd = Xmlworker.anl_list(path, i, current)
+                k_l += 1
+                return dd
+
+
+        return current
