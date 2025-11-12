@@ -458,4 +458,5 @@ class Xmlworker:
                 dd = Xmlworker.anl_list(path, i, current)
                 k_l += 1
                 return dd
+        print(current)
         return current

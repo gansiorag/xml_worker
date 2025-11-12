@@ -25,14 +25,15 @@ xml_worker = Xmlworker()
 # name_file = '/home/gansior/MyProject/xml_worker/test_datasets/schemas_egrul/schemas.xsd'
 name_file = '/home/gansior/MyProject/parser_xml_egrul_egrip/dataset/egrul/aronov/7107133140.xml'
 # data_str = 'ЕГРЮЛ^СвЮЛ^СвЗапЕГРЮЛ^СвРегОрг'
-data_str = 'ЕГРЮЛ^СвЮЛ^СвЗапЕГРЮЛ^ВидЗап^@НаимВидЗап'
+# data_str = 'ЕГРЮЛ^СвЮЛ^СвЗапЕГРЮЛ^ВидЗап^@НаимВидЗап'
 # data_str = 'ЕГРЮЛ^СвЮЛ^СвЗапЕГРЮЛ^ВидЗап^@КодСПВЗ'
 # data_str = 'ЕГРЮЛ^СвЮЛ^СвАдресЮЛ^СвАдрЮЛФИАС^Здание'
-# data_str = 'ЕГРЮЛ^СвЮЛ^СвЗапЕГРЮЛ^СвРегОрг^@НаимНО'
+data_str = 'ЕГРЮЛ^СвЮЛ^СвЗапЕГРЮЛ^СвРегОрг^@НаимНО'
 # data_str = 'ЕГРЮЛ^СвЮЛ^СвЗапЕГРЮЛ^СведПредДок'
 # name_file = '/home/gansior/MyProject/xml_worker/test_datasets/doverennost.xml'
 # data_str = 'Доверенность^Документ^Довер^СвДоверит^Доверит'
 # data_str = 'Доверенность^Документ^Довер^СвДоверит^Доверит^РосОргДовер^СвРосОрг^АдрРег'
+# data_str = 'Доверенность^Документ^Довер^СвДоверит^Доверит^РосОргДовер^ЛицоБезДов^СвФЛ^@СНИЛС'
 with open(name_file, 'r', encoding='utf-8') as i_f:
     data = i_f.read()
     data_clear = xml_worker.xml_clear(data)
@@ -48,6 +49,8 @@ with open(name_file, 'r', encoding='utf-8') as i_f:
 
     # Получения значения по пути к фрагменту
     rez_data = xml_worker.get_data_field(dict_data, data_str)
+    
+    
     # print()
     # print('rez_data ==> ')
     # pprint.pprint(rez_data)
