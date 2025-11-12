@@ -273,9 +273,10 @@ class Xmlworker:
                         key + "^", level, is_dict[key], full_info
                     )
         if isinstance(is_dict, list):
-            print("root_list", f", List string")
-            full_info += "root_list," + f" List string\n"
-            full_info = list_analysis_dist("root_list", level, is_dict, full_info)
+            print("root_list List string")
+            full_info += "root_list, List string\n"
+            full_info = list_analysis_dist("root_list", level, is_dict,
+                                           full_info)
         full_info_set = sorted(set(full_info.split("\n")))
         if full_path_file:
             with open(full_path_file, "w", encoding="utf-8") as r_f:
@@ -356,17 +357,24 @@ class Xmlworker:
 
     @staticmethod
     def anl_list(path_full: list, step: int, i_d: list):
-        k_l = 0
-        for d_l in i_d:
-            if isinstance(d_l, list):
-                print(f'List_2 {k_l}')
+        """
+        Рекурсивно обходит список, содержащий строки, словари и вложенные списки.
+        
+        Как только встречает строку — сразу возвращает её.
+        Для словарей и списков делает рекурсивный вызов.
+        Если строка не найдена — возвращает None.
+        """        
+        dd = None
+        for index, d_l in enumerate(i_d):
+            if isinstance(d_l, str):
+                return d_l            
+            elif isinstance(d_l, list):
+                print(f'List_2 {index}')
                 dd = Xmlworker.anl_list(path_full, step, d_l)
-                k_l += 1
             if isinstance(d_l, dict):
                 dd = Xmlworker.anl_dict(path_full, step, d_l)
-            if isinstance(d_l, str):
-                return d_l       
-        
+        return dd
+
     @staticmethod
     def anl_dict(path_full: list, step: int, i_d: dict):
         """Раскладывает словарь до конечного значения
@@ -388,14 +396,22 @@ class Xmlworker:
         if step == len(path_full):
             key = path_full[step - 1]
             print(f'Value key {key}')
+            # print(i_d)
             if key in i_d:
                 pprint(i_d[key])
                 return i_d[key]
-            else:
+            elif path_full[step - 1] in i_d:
+                # print(key, ' ==> ', i_d[path_full[step - 2]][key])
+                return i_d[path_full[step - 2]][key]
+            elif path_full[step - 2] in i_d:
                 if isinstance(i_d[path_full[step - 2]][key], str):
                     print(i_d[path_full[step - 2]][key])
-
                     return i_d[path_full[step - 2]][key]
+                else:
+                    print(i_d[path_full[step - 1]][key])
+                    return i_d[path_full[step - 1]][key]
+            else:
+                return print(i_d)
         else:
             key = path_full[step]
             if isinstance(i_d, dict):
@@ -407,7 +423,20 @@ class Xmlworker:
                 raise KeyError(f"Value step {step}: {key} is {i_d[key]}")
 
     @staticmethod
-    def get_data(is_da: dict, data_str: str):
+    def get_data_field(is_da: dict, data_str: str):
+        """Получение значения поля по известному пути к нему
+
+        Args:
+            is_da (dict): Словарь данных
+            data_str (str): строка описывающая путь по словарю
+            пример - ЕГРЮЛ^СвЮЛ^СвЗапЕГРЮЛ^СведПредДок^НаимДок
+
+        Raises:
+            ValueError: Проверяет что входные данные являются словарем
+
+        Returns:
+            _type_: Ничего не возвращает
+        """        
         if not isinstance(is_da, dict):
             raise ValueError("is_da must be a dictionary")
         if not data_str or not isinstance(data_str, str):
@@ -419,7 +448,7 @@ class Xmlworker:
         k_l = 0
         current = is_da
         for i, key in enumerate(path):
-            print(f' 1 == {key}')
+            print(f' {i} == {key}')
             if key not in current:
                 print(f"Error - field '{'^'.join(path[:i+1])}' not found!")
                 return None
@@ -429,6 +458,4 @@ class Xmlworker:
                 dd = Xmlworker.anl_list(path, i, current)
                 k_l += 1
                 return dd
-
-
         return current
