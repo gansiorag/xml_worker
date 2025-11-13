@@ -49,8 +49,7 @@ with open(name_file, 'r', encoding='utf-8') as i_f:
 
     # Получения значения по пути к фрагменту
     rez_data = xml_worker.get_data_field(dict_data, data_str)
-    
-    
+
     # print()
     # print('rez_data ==> ')
     # pprint.pprint(rez_data)
